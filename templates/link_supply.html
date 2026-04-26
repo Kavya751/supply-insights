@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Link Supply</title>
+    <link rel="icon" href="/static/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h3 class="mb-3">Link Supplier and Product</h3>
+
+    <form method="POST">
+
+        <label>Supplier</label>
+        <select name="supplier_id" class="form-control mb-2">
+            {% for s in suppliers %}
+            <option value="{{ s[0] }}">{{ s[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Product</label>
+        <select name="product_id" class="form-control mb-2">
+            {% for p in products %}
+            <option value="{{ p[0] }}">{{ p[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <input name="quantity" placeholder="Quantity" class="form-control mb-2">
+        <input type="date" name="date" class="form-control mb-3">
+
+        <button class="btn btn-warning">Submit</button>
+        <a href="/" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+
+</body>
+</html>

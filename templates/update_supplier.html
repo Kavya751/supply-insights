@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Supplier</title>
+    <link rel="icon" href="/static/logo.png">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container mt-5">
+<h3>Update Supplier</h3>
+
+<form method="POST">
+<input value="{{ supplier[1] }}" name="name" class="form-control mb-2">
+<input value="{{ supplier[2] }}" name="email" class="form-control mb-2">
+<input value="{{ supplier[3] }}" name="city" class="form-control mb-3">
+
+<button class="btn btn-primary">Update</button>
+<a href="/" class="btn btn-secondary">Back</a>
+</form>
+
+</div>
+</body>
+</html>

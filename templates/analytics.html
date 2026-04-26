@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics Dashboard</title>
+    <link rel="icon" href="/static/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <div class="d-flex align-items-center">
+            <img src="/static/logo.png" style="height:35px; margin-right:10px;">
+            <span class="navbar-brand mb-0 h1">Supply Insights</span>
+        </div>
+
+        <div class="ml-auto">
+            <a href="/" class="btn btn-outline-light btn-sm mr-2">Home</a>
+            <a href="/add_supplier" class="btn btn-outline-light btn-sm mr-2">Add Supplier</a>
+            <a href="/add_product" class="btn btn-outline-light btn-sm mr-2">Add Product</a>
+            <a href="/link_supply" class="btn btn-outline-light btn-sm mr-2">Link Supply</a>
+            <a href="/analytics" class="btn btn-warning btn-sm">Analytics</a>
+        </div>
+    </nav>
+
+<div class="container mt-4" style="margin-top:80px;">
+
+    <div class="text-center mb-3">
+        <a href="/" class="btn btn-secondary">Back</a>
+    </div>
+
+    <div class="row text-center mb-4">
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Total Suppliers</h6>
+                <h3>{{ total_suppliers }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Total Products</h6>
+                <h3>{{ total_products }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Total Supply</h6>
+                <h3>{{ total_quantity }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Active Suppliers</h6>
+                <h3>{{ active_supplier_count }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="row mt-4">
+
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h5 class="text-center">Supplier Performance</h5>
+                <canvas id="supplierChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h5 class="text-center">Category Distribution</h5>
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="chart-container">
+                <h5 class="text-center">Monthly Supply Trend</h5>
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLES -->
+    <h4 class="mt-4">Top Suppliers</h4>
+    <table class="table table-bordered">
+        <tr><th>Supplier</th><th>Total Supply</th></tr>
+        {% for row in top_suppliers %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h4 class="mt-4">Low Supply Products</h4>
+    <table class="table table-bordered">
+        <tr><th>Product</th><th>Total Supply</th></tr>
+        {% for row in low_products %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+<script>
+
+    const supplierData = {{ supplier_performance | tojson }};
+    const categoryDataRaw = {{ category_data | tojson }};
+    const trendDataRaw = {{ monthly_trend | tojson }};
+
+    const supplierLabels = supplierData.map(row => row[1]);
+    const supplierValues = supplierData.map(row => row[2]);
+
+    const categoryLabels = categoryDataRaw.map(row => row[0]);
+    const categoryValues = categoryDataRaw.map(row => row[1]);
+
+    const trendLabels = trendDataRaw.map(row => row[0]);
+    const trendValues = trendDataRaw.map(row => row[1]);
+
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false
+    };
+
+    new Chart(document.getElementById('supplierChart'), {
+        type: 'bar',
+        data: {
+            labels: supplierLabels,
+            datasets: [{
+                label: 'Total Supply',
+                data: supplierValues
+            }]
+        },
+        options: commonOptions
+    });
+
+    new Chart(document.getElementById('categoryChart'), {
+        type: 'pie',
+        data: {
+            labels: categoryLabels,
+            datasets: [{
+                data: categoryValues
+            }]
+        },
+        options: commonOptions
+    });
+
+    new Chart(document.getElementById('trendChart'), {
+        type: 'line',
+        data: {
+            labels: trendLabels,
+            datasets: [{
+                label: 'Monthly Supply',
+                data: trendValues
+            }]
+        },
+        options: commonOptions
+    });
+
+</script>
+
+</body>
+</html>

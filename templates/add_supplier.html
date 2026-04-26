@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Supplier</title>
+    <link rel="icon" href="/static/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h3 class="mb-3">Add Supplier</h3>
+
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input name="supplier_id" placeholder="Supplier ID" class="form-control mb-2" required>
+        <input name="name" placeholder="Name" class="form-control mb-2" required>
+        <input name="email" placeholder="Email" class="form-control mb-2">
+        <input name="city" placeholder="City" class="form-control mb-3">
+
+        <button class="btn btn-primary">Submit</button>
+        <a href="/" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+
+</body>
+</html>

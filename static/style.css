@@ -1,0 +1,62 @@
+body {
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+    font-weight: 600;
+}
+
+.table {
+    background: white;
+}
+
+.btn {
+    margin-right: 5px;
+    border-radius: 6px;
+}
+
+form input {
+    border-radius: 6px;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+}
+
+h5 {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+canvas {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.chart-container {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+    height: 350px;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 10px;
+}

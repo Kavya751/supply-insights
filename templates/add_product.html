@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <link rel="icon" href="/static/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h3 class="mb-3">Add Product</h3>
+
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input name="product_id" placeholder="Product ID" class="form-control mb-2" required>
+        <input name="name" placeholder="Product Name" class="form-control mb-2" required>
+        <input name="category" placeholder="Category" class="form-control mb-2">
+        <input name="price" placeholder="Price" class="form-control mb-3">
+
+        <button class="btn btn-success">Submit</button>
+        <a href="/" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+
+</body>
+</html>
